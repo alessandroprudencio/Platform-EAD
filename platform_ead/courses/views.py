@@ -11,3 +11,12 @@ def courses(request):
     templateName = "pages/courses.html"
     return render(request, templateName, context)
 
+def details(request, id):
+    course = Course.objects.get(id=id)
+    context={
+        'course':course
+    }
+    templateName = "pages/details.html"
+
+    return render(request,templateName,context)
+

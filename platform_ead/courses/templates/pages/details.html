@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+            <div class="content-ribbon">
+                <div class="pure-u-1">
+                    <div class="l-box">
+                            <p class="title-course">{{course.name}}</h6>
+                                
+                            {% if course.image %}
+                            <img class="img" width="100" style="  min-width: 100px;  max-width: 150px;" src="{{course.image.url }}" alt="" />
+                            {% else %}
+                            <img width="192" src="{% static 'preview/sem_img.png' %}" alt="" />
+                            {% endif %}
+                            <a class="content-subhead-course-author" href="" title="">{{course.author}} - {{course.created_at}}</a>          
+
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="">
+                    <div>
+                        <a href="">
+
+                           
+                            <div class="pure-u">
+                                    <div class="l-box">
+                                            
+                                        <p class="content-subhead-course"><a href="" title=""></a></p>
+                                        
+                                        <h2>Sobre o curso</h2>
+                                                O Django é um framework para desenvolvimento web escrito em Python. Ele provê diversos mecanismos para o desenvolvimento da aplicações web completas de forma rápida e fácil. Inicialmente desenvolvido pensando na criação de aplicações rápidas, o Django possui diversos recursos para otimização em todo o processo de desenvolvimento de nossa aplicação, como veremos ao longo do curso.
+                                                
+                                                Portanto, veremos neste curso como funciona o Django e como implementar uma aplicação com acesso ao banco de dados com validações tanto no Back-end quanto no Front-end. Tudo isso utilizando o Python \o
+                                                
+                                                Conhecimentos adquiridos
+                                                Neste curso abordaremos os principais conceitos a cerca do Django, além disso, veremos todas as funcionalidades oferecidas por este framework e como utilizá-las. São vídeo aulas e apostilas que mostram os principais conceitos do Django. Também serão passados exercícios para que você possa fixar, praticar e aplicar o conteúdo aprendido durante o curso.
+                                                
+                                        <h2>Dentre várias outras coisas, você verá:</h2>
+                                        
+                                                
+                                                - O que é o Django e como funciona sua arquitetura;
+                                                - Como instalar o Django utilizando o PIP em qualquer sistema operacional;
+                                                - Como funciona cada uma das camadas da arquitetura do Django;
+                                                - Como criar filtros para melhorar a listagem dos dados;
+                                                - Como trabalhar com bancos de dados em aplicações Django;
+                                                - Como traduzir a aplicação desenvolvida para o português do Brasil;
+                                                - Como o Django trata alguns dos principais problemas de segurança presentes em aplicações web.
+                                                
+                                                <h2>Para quem é esse curso?</h2>
+                                                Este curso é voltado para desenvolvedores que já possua conhecimentos intermediários no Python e desejam criar aplicações web com esta linguagem.
+                                                
+                                                <h2>Quais os pré-requisitos para esse curso?</h2>
+                                                Os pré-requisitos não são obrigatórios, são apenas sugestões. Eles dão uma base de
+                                                parte do conhecimento que é interessante ter para um bom aproveitamento nesse curso.
+                                                
+                                               
+                                                <li>Python - Fundamentos </li>
+                                                <li>Python - Orientação a objetos</li>
+                                                <li>Python - Orientação a objetos</li>
+                                                <li>Python - Collections</li>
+                                                <li>Python - Banco de dados com DB API</li>
+                                                <li>Python  - SQLAlchemy ORM</p>
+                                    </div>
+                                </div>
+                        </a>
+                    </div>
+              
+            </div>
+            
+            <div class="">
+                    <div class="pure-u-1">
+                        <div class="l-box">
+                        </div>
+                    </div>
+            </div>
+            
+</body>
+</html>
+
+{% endblock %}
