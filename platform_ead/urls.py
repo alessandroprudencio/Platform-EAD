@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from platform_ead.core import views
+from platform_ead.courses import views
 from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('platform_ead.core.urls')),
+    path('cursos/', include('platform_ead.courses.urls')),
 
 ]

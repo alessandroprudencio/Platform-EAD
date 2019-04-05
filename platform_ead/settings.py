@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'platform_ead.core',
-    'platform_ead.courses'
+    'platform_ead.courses',
 ]
 
 MIDDLEWARE = [

@@ -52,9 +52,14 @@ body .primary-button {
     border-bottom: 2px solid #eee;
     display: inline-block;
 }
+a{
+    text-decoration:none; 
+}
 .content .content-ribbon {
-    margin: 3em;
+    margin: 4em;
+    margin-left: 2em;
     border-bottom: 1px solid #eee;
+    display: block;
 }
 .ribbon {
     background: #eee;
@@ -77,4 +82,44 @@ body .primary-button {
 .header .nome-usuario{
     color: red;
     margin-left: 350%;
+}
+
+.title-course{
+    font-weight: 600;
+    font-size: 20px;
+    color: #505763;
+    margin: 0 0 0px;
+}
+
+.content-ribbon .container-course{
+    text-align: center;   
+    width: 300px;
+    height: 300px;
+    -webkit-border-radius: 2px;
+    -webkit-border-top-left-radius: 10px;
+    -moz-border-radius: 2px;
+    -moz-border-radius-topleft: 10px;
+    border-radius: 2px;
+    border-top-left-radius: 10px;margin-bottom:3rem;
+    border: 1px solid #cccccc;
+    margin-left: 5em;
+    padding: 18px;
+    float: left;
+}
+
+.content-subhead-course{
+    font-size: 0.9rem;
+    color: black;
+    font-weight: 500;
+    margin: 0;
+    margin-top:160px;
+
+} 
+a:visited{
+    color:transparent;
+}
+
+a.content-subhead-course-author{
+    color: #666;
+    font-size: 0.6rem;
 }

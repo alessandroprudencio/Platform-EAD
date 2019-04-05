@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="content-ribbon">
+    <div class="pure-u-1">
+        <div class="l-box">
+            <h4 class="title-course">O que aprender hoje?</h4>
+        </div>
+    </div>
+</div>
+
+{% for course in courses %}
+
+<div class="container-course">
+        <div>
+            <a href="">
+            <img width="150" src="{{ course.image }}" alt="" />
+            </a>
+        </div>
+    <div class="pure-u">
+        <div class="l-box">
+            <p class="content-subhead-course"><a href="" title="">{{course.name}}</a></p>
+            <a class="content-subhead-course-author" href="" title="">{{course.author}} - {{course.created_at}}</a>          
+        </div>
+    </div>
+</div>
+
+
+{% endfor %}
+
+
+<div class="">
+    <div class="pure-u-1">
+        <div class="l-box">
+            <p>Nenhum curso está disponível na plataforma</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,7 +1,6 @@
-from django.contrib import admin
-from pĺatform_ead.courses import views
-from django.urls import path
+from platform_ead.courses import views
+from django.urls import path, include
 
 urlpatterns = [
-    path('',views.home, name='courses')
+    path('',views.courses, name='courses')
 ]
