@@ -107,13 +107,12 @@ a{
     float: left;
 }
 
-.content-subhead-course{
+.container-course .content-subhead-course{
     font-size: 0.9rem;
     color: black;
     font-weight: 500;
     margin: 0;
-    margin-top:160px;
-
+    margin-bottom: 10%;
 } 
 a:visited{
     color:transparent;
