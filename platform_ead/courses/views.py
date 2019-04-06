@@ -5,6 +5,8 @@ from django.http import Http404
 from .models import Course
 from .forms import ContactCourse
 
+
+
 def courses(request):
     courses = Course.objects.all()
 
@@ -25,8 +27,9 @@ def details(request, slug):
         if request.method == 'POST':
             form  = ContactCourse(request.POST)
             if form.is_valid():
-                    context['is_valid'] = True
-                    form = ContactCourse()
+                context['is_valid'] = True
+                form.send_mail(course)  
+                form = ContactCourse()
 
         else:
             form = ContactCourse(),
