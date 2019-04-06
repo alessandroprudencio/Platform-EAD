@@ -16,7 +16,7 @@
 
 <div class="container-course">
         <div>
-            <a href="">
+            <a href="{{ course.get_absolute_url }}">
             {% if  course.image %}
                 <img width="150" style="  min-width: 150px;  max-width: 150px;" src="{{course.image.url }}" alt="" />
             {% else %}
@@ -26,7 +26,7 @@
         </div>
     <div class="pure-u">
         <div class="l-box">
-            <p class="content-subhead-course"><a href="" title="">{{course.name}}</a></p>
+            <p class="content-subhead-course"><a href="{{ course.get_absolute_url }}" title="">{{course.name}}</a></p>
             <a class="content-subhead-course-author" href="" title="">{{course.author}} - {{course.created_at}}</a>          
         </div>
     </div>
