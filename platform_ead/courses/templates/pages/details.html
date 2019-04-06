@@ -3,15 +3,16 @@
 {% load static %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+
+{% if is_valid %}
+    <div class="pure-u-1 alert alert-success alert-dismissible fade show" role="alert">
+        <h4>MENSAGEM ENVIADA COM SUCESSO !</h4>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %}
+
             <div class="content-ribbon">
                 <div class="pure-u-1">
                     <div class="l-box">
@@ -76,15 +77,36 @@
                     </div>
               
             </div>
-            
+
             <div class="">
                     <div class="pure-u-1">
                         <div class="l-box">
+
+                                <div class="container">
+                                        {{ form.non_field_errors }}
+
+                       
+
+                                        <form action="#" class="form-contact" method="post" tabindex="1">
+                                            {% csrf_token %}
+
+
+                                          <input type="text" class="form-contact-input" name="name" placeholder="Nome" />
+                                          {{ form.name.errors }}
+
+                                          <input type="email" class="form-contact-input" name="email" placeholder="Email" />
+                                          {{ form.email.errors }}
+                                          
+                                          
+                                          <textarea class="form-contact-textarea" name="message" placeholder="Deixe uma mensagem"></textarea>
+                                          {{ form.message.errors }}
+                                          
+                                          <button type="submit" class="form-contact-button">Enviar</button>
+                                        </form>
+                                </div>                            
                         </div>
                     </div>
             </div>
             
-</body>
-</html>
 
 {% endblock %}
