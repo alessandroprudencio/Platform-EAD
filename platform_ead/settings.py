@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     'platform_ead.core',
     'platform_ead.courses',
+    'platform_ead.accounts'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,6 @@ EMAIL_HOST_PASSWORD ='07208015163'
 EMAIL_PORT = 587 
 
 CONTACT_EMAIL = 'alessandroconectado@gmail.com'
+
+LOGIN_URL = '/accounts/entrar/'
+
