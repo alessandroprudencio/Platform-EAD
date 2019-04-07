@@ -14,20 +14,27 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        
 </head>
 <body>
 <div class="content">
     <div class="header">
-        <div class="pure-menu pure-menu-open pure-menu-fixed pure-menu-horizontal">
-            <a class="pure-menu-heading" href="">ALESSANDRO DESENVOLVEDOR</a>
-            <ul>
-                <li class="pure-menu-selected"><a href="{% url 'home' %}">INICIO</a></li>
-                <li><a href="{% url 'courses' %}">CURSOS</a></li>
-                <li><a href="{% url 'contact' %}">CONTATO</a></li>
-                <li><a href="{% url 'accounts' %}" class="nome-usuario">ENTRAR</a></li>
-
-            </ul>
-        </div>
+        <nav>
+            <div class="nav-wrapper">
+              <a href="/" class="brand-logo">PLATFORM EAD</a>
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li class="pure-menu-selected"><a href="{% url 'home' %}">INICIO</a></li>
+                    <li><a href="{% url 'courses' %}">CURSOS</a></li>
+                    <li><a href="{% url 'contact' %}">CONTATO</a></li>
+                    <li><a href="{% url 'accounts' %}">LOGIN</a></li>
+              </ul>
+            </div>
+          </nav>
+                
         
     </div>
     <div class="content">

@@ -7,21 +7,26 @@ body {
     margin: 0 auto;
     line-height: 1.7em;
 }
+nav{
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
+}
+nav a:hover{
+    text-decoration: none;
+}
+
+nav ul a:hover{
+text-decoration: none;
+color: white
+}
+ 
 .l-box {
     padding: 1em;
 }
 .header {
     margin: 0 0;
 }
-.header .pure-menu {
-    padding: 0.5em;
-}
-.header .pure-menu li a:hover,
-.header .pure-menu li a:focus {
-    background: none;
-    border: none;
-    color: #aaa;
-}
+
+
 body .primary-button {
     background: #02a6eb;
     color: #fff;
@@ -52,9 +57,7 @@ body .primary-button {
     border-bottom: 2px solid #eee;
     display: inline-block;
 }
-a{
-    text-decoration:none; 
-}
+
 .content .content-ribbon {
     margin: 4em;
     margin-left: 2em;
@@ -114,9 +117,7 @@ a{
     margin: 0;
     margin-bottom: 10%;
 } 
-a:visited{
-    color:transparent;
-}
+
 
 a.content-subhead-course-author{
     color: #666;

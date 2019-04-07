@@ -129,5 +129,8 @@ EMAIL_PORT = 587
 
 CONTACT_EMAIL = 'alessandroconectado@gmail.com'
 
-LOGIN_URL = '/accounts/entrar/'
 
+#Auth
+LOGIN_URL = '/accounts/entrar/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = 'accounts:logout'
