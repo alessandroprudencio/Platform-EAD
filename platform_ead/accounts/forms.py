@@ -10,7 +10,7 @@ class RegisterForm(UserCreationForm):
         email = self.cleaned_data['email']
 
         if User.objects.filter(email=email).exists():
-            raise forms.ValidationError('E-mail ja cadastrado')
+            raise forms.ValidationError('E-mail já cadastrado')
         return email
 
     def save(self, commit=True):

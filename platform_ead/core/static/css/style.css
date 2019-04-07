@@ -25,7 +25,10 @@ color: white
 .header {
     margin: 0 0;
 }
-
+.header .brand-logo{
+    margin-left: 10px;
+    margin-right: 100px;
+}
 
 body .primary-button {
     background: #02a6eb;
