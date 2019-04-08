@@ -10,6 +10,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from .forms import RegisterForm
 
+from django.contrib.auth.decorators import login_required
+
 def register(request):
     template_name = 'registration/register.html'
 
@@ -27,3 +29,8 @@ def register(request):
         'form':form
     }
     return render(request, template_name, context)
+
+@login_required
+def dashboard(request):
+    template_name = 'dashboard/dashboard.html'
+    return render (request, template_name)
