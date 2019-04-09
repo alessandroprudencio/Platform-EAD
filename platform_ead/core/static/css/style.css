@@ -24,10 +24,14 @@ color: white
 }
 .header {
     margin: 0 0;
+
+}
+ul:not(.browser-default){
+    margin-right: 15px;
 }
 .header .brand-logo{
     margin-left: 10px;
-    margin-right: 100px;
+    padding-right: 100px;
 }
 
 body .primary-button {
@@ -121,6 +125,9 @@ body .primary-button {
     margin-bottom: 10%;
 } 
 
+.nav ul {
+font-size: 2px;
+}
 
 a.content-subhead-course-author{
     color: #666;
