@@ -19,3 +19,16 @@ class RegisterForm(UserCreationForm):
         if commit:
             user.save()
         return user 
+
+class EditAccountForm(forms.ModelForm):
+
+     def clean_email(self) :
+        email = self.cleaned_data['email']
+        queryset = User.objects.filter(email=email).exclude(pk=self.instance.pk)
+        if  queryset.exists():
+            raise forms.ValidationError('E-mail já cadastrado')
+        return email
+     class Meta:
+        model  = User
+        fields = ['username','email', 'last_name', 'first_name']
+        

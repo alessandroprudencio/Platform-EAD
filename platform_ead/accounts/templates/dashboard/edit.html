@@ -1,0 +1,53 @@
+{% extends   'dashboard/dashboard.html' %}
+
+{% block breadcrumb %}
+{{ block.super  }}
+<a href=""> / EDITAR</a>
+{% endblock %}
+
+{% block dashboard_content %}
+
+<form method="post">
+{{ form.non_field_errors }}
+
+                {% csrf_token %}
+
+        <ul>
+                <li><i class="material-icons">people</i><input name="username" value="{{user}}" type="text" /></li>
+                <div style="color:red">{{ form.username.errors }}</div>
+
+                <li><i class="material-icons">email</i><input name="email" value=" {{user.email}}" type="text" /></li>
+                <div style="color:red">{{ form.email.errors }}</div>
+
+                <li><i class="material-icons">people</i><input name="last_name" value="{{user.last_name}}"
+                                type="text" /></li>
+                <div style="color:red">{{ form.last_name.errors }}</div>
+
+                <li><i class="material-icons">people</i><input name="first_name" value="{{user.first_name}}"
+                                type="text" /></li>
+                <div style="color:red">{{ form.first_name.errors }}</div>
+
+                <li><i class="material-icons">people</i>
+                        <input id="id_old_password" placeholder="Senha Antiga" name="old_password" value="{{user.old_password}}" type="text" />
+
+                </li>
+                <div style="color:red">{{ form.old_password.errors }}</div>
+
+                <li><i class="material-icons">people</i><input placeholder="Nova Senha" name="new_password1" value="{{user.new_password1}}"
+                                type="text" /></li>
+                <div style="color:red">{{ form.new_password1.errors }}</div>
+
+                <li><i class="material-icons">people</i><input placeholder="Confirme Nova Senha"  name="new_password2" value="{{user.new_password2}}"
+                                type="text" /></li>
+                <div style="color:red">{{ form.new_password2.errors }}</div>
+
+
+        </ul>
+
+        </li>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Salvar
+                <i class="material-icons right">send</i>
+        </button>
+</form>
+
+{% endblock %}
