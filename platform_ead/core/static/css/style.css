@@ -209,3 +209,11 @@ a.content-subhead-course-author{
     position: fixed;
     margin-left: 73%;
 }
+
+.input-field>label{
+    font-size: 13px;
+    color: black;
+}
+.labelColor{
+    font-size: 12px;
+}

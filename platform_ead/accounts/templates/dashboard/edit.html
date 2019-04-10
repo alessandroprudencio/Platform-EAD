@@ -8,43 +8,75 @@
 {% block dashboard_content %}
 
 <form method="post">
-{{ form.non_field_errors }}
+        {{ form.non_field_errors.as_text }}
 
-                {% csrf_token %}
+        {% csrf_token %}
 
         <ul>
-                <li><i class="material-icons">people</i><input name="username" value="{{user}}" type="text" /></li>
-                <div style="color:red">{{ form.username.errors }}</div>
+                <li>
+                        <div class="input-field">
+                                        <input id="id_user" name="username" value="{{user}}" type="text" class="validate">
+                                        <label  style="color:#666;font-size: 13px;font-weight: 100" for="id_user">Nome Usuário</label>
+                                        <div style="color:red">{{ form.username.errors }}</div>
+                        </div>
+                </li>
+                
 
-                <li><i class="material-icons">email</i><input name="email" value=" {{user.email}}" type="text" /></li>
-                <div style="color:red">{{ form.email.errors }}</div>
+                <li>
+                      <div class="input-field">
+                                <input id="id_email" name="email" value="{{user.email}}" type="email" class="validate">
+                                <label  style="color:#666;font-size: 13px;font-weight: 100" for="id_email">Email</label>
+                                <div style="color:red">{{ form.email.errors }}</div>
+                        </div>
+                </li>
 
-                <li><i class="material-icons">people</i><input name="last_name" value="{{user.last_name}}"
-                                type="text" /></li>
-                <div style="color:red">{{ form.last_name.errors }}</div>
-
-                <li><i class="material-icons">people</i><input name="first_name" value="{{user.first_name}}"
-                                type="text" /></li>
-                <div style="color:red">{{ form.first_name.errors }}</div>
-
-                <li><i class="material-icons">people</i>
-                        <input id="id_old_password" placeholder="Senha Antiga" name="old_password" value="{{user.old_password}}" type="text" />
+                <li>
+                        <div class="input-field">
+                                <input id="id_first_name" name="first_name" value="{{user.first_name}}" type="text"
+                                        type="text" class="validate">
+                                <label  style="color:#666;font-size: 13px;font-weight: 100" for="id_first_name">Primeiro Nome</label>
+                                <div style="color:red">{{ form.first_name.errors }}</div>
+                        </div>
 
                 </li>
-                <div style="color:red">{{ form.old_password.errors }}</div>
 
-                <li><i class="material-icons">people</i><input placeholder="Nova Senha" name="new_password1" value="{{user.new_password1}}"
-                                type="text" /></li>
-                <div style="color:red">{{ form.new_password1.errors }}</div>
+                <li>
+                        <div class="input-field">
+                                <input id="id_last_name" name="last_name" value="{{user.last_name}}" type="text" class="validate"/>
+                                <label  style="color:#666;font-size: 13px;font-weight: 100" for="id_last_name">Ultimo Nome</label>
+                                <div style="color:red">{{ form.last_name.errors }}</div>
+                        </div>
 
-                <li><i class="material-icons">people</i><input placeholder="Confirme Nova Senha"  name="new_password2" value="{{user.new_password2}}"
-                                type="text" /></li>
-                <div style="color:red">{{ form.new_password2.errors }}</div>
+                </li>
 
+
+                <li>
+                        <div class="input-field">
+                                <input id="id_old_password" name="old_password" value="{{user.old_password}}" type="password" class="validate"/>
+                                <label style="color: #666;font-size: 13px;font-weight: 100" for="id_old_password">Senha Antiga</label>
+                        <div style="color:red">{{ form.old_password.errors }}</div>
+                        </div>
+                </li>
+
+
+                <li>
+                        <div class="input-field">
+                                <input id="id_new_password1" name="new_password1" value="{{user.new_password1}}" type="password" class="validate"/>
+                                <label  style="color:#666;font-size: 13px;font-weight: 100" for="id_new_password1">Nova Senha</label>
+                        <div style="color:red">{{ form.new_password1.errors }}</div>
+                        </div>
+                </li>
+
+                <li>
+                        <div class="input-field">
+                                <input id="id_new_password2" name="new_password2" value="{{user.new_password2}}" type="password" class="validate"/>
+                                <label  style="color:#666;font-size: 13px;font-weight: 100" for="id_new_password2">Confirme Nova Senha</label>
+                        <div style="color:red">{{ form.new_password2.errors }}</div>
+                        </div>
+                </li>
 
         </ul>
 
-        </li>
         <button class="btn waves-effect waves-light" type="submit" name="action">Salvar
                 <i class="material-icons right">send</i>
         </button>

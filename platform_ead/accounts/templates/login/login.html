@@ -29,7 +29,7 @@
                     </div>
 					<div style=" color:red">{{ form.username.errors }}</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Senha é obrigatprio">
+					<div class="wrap-input100 validate-input" data-validate = "Senha é obrigatório">
 						<input class="input100" type="password" name="password" placeholder="Senha">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
@@ -48,7 +48,7 @@
 						<span class="txt1">
 							Esqueceu
 						</span>
-						<a class="txt2" href="#">
+						<a class="txt2" href="{%  url 'password_reset' %}">
 							Usuário / Senha?
 						</a>
 					</div>

@@ -1,16 +1,23 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.contrib.auth.forms import (UserCreationForm, PasswordChangeForm,
+    SetPasswordForm)
 
-from django.contrib.auth import authenticate ,login, logout
+from django.contrib.auth import authenticate ,login, logout, get_user_model
 
 from django.conf import  settings
 
 from django.http import HttpResponse, HttpResponseRedirect
 
-from .forms import RegisterForm,EditAccountForm
+from .forms import RegisterForm,EditAccountForm, PasswordResetForm
 
 from django.contrib.auth.decorators import login_required
+
+from .models import PasswordReset
+
+from platform_ead.core.utils  import generate_hash_key
+
+User = get_user_model()
 
 def register(request):
     template_name = 'registration/register.html'
@@ -30,6 +37,32 @@ def register(request):
     }
     return render(request, template_name, context)
 
+def password_reset(request):
+    template_name = 'reset/reset_password.html'
+    context = {}
+    form = PasswordResetForm(request.POST or None)
+    if form.is_valid(): 
+        form.save()
+        context['success'] =True
+
+    context['form'] = form
+
+    return render(request, template_name, context)
+
+def password_reset_confirm(request, key):
+    template_name = 'reset/confirm_new_password.html'
+    context = {}
+    reset = get_object_or_404(PasswordReset, key=key)
+    form = SetPasswordForm(user=reset.user, data=request.POST  or None)
+    print(form)
+
+    if form.is_valid():
+        print('entru')
+        form.save()
+        context['success'] = True
+    context['form'] = form
+    return render(request, template_name, context)
+
 @login_required
 def dashboard(request):
     template_name = 'dashboard/dashboard.html'
@@ -41,9 +74,11 @@ def edit(request):
     context = {}
     if request.method == 'POST':
         form = EditAccountForm(request.POST, instance=request.user)
+        print(form)
         if form.is_valid():
             form = EditAccountForm(instance=request.user)
             form = PasswordChangeForm(data=request.POST, user=request.user)
+            print('ENTRIU')
             if form.errors:
                  context['success'] = False
             else:
@@ -51,7 +86,7 @@ def edit(request):
                 context['success'] = True
                 return redirect(settings.DASHBOARD_URL)
         else:
-            print('não passo valid')
+            print('NÃO FORM.IS_VALID()')
             form = EditAccountForm(instance=request.user)
         context['form'] = form
 
