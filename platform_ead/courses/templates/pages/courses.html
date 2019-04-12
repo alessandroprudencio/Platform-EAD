@@ -28,6 +28,11 @@
         <div class="l-box">
             <p class="content-subhead-course"><a href="{{ course.get_absolute_url }}" title="">{{course.name}}</a></p>
             <a class="content-subhead-course-author" href="" title="">{{course.author}} - {{course.created_at}}</a>          
+           <a href="{% url 'enrollments' course.slug %}"><button class="btn waves-effect waves-light" type="submit" name="action">INSCREVA-SE
+                <i class="material-icons right">send</i>
+              </button>
+            </a>
+                    
         </div>
     </div>
     

@@ -3080,7 +3080,7 @@ var Tooltip = function ($) {
       this._activeTrigger = {};
       this._popper = null;
 
-      // protected
+      // CASCADEed
       this.element = element;
       this.config = this._getConfig(config);
       this.tip = null;
@@ -3313,7 +3313,7 @@ var Tooltip = function ($) {
       }
     };
 
-    // protected
+    // CASCADEed
 
     Tooltip.prototype.isWithContent = function isWithContent() {
       return Boolean(this.getTitle());

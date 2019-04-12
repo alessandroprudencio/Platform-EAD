@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponse
 from django.http import Http404
-
-from .models import Course
+from django.contrib.auth.decorators import login_required
+from .models import Course, Enrollment
 from .forms import ContactCourse
+from django.contrib import messages
 
 
 
@@ -42,4 +43,31 @@ def details(request, slug):
 
     return render(request,templateName,context)
 
+@login_required
+def enrollment(request, slug):    
+    course = get_object_or_404(Course, slug=slug)
+    enrollment, created = Enrollment.objects.get_or_create(user=request.user,course=course)
+    if created:
+        # enrollment.active()
+        messages.success(request,'Parabéns você foi inscrito com sucesso!')
+    else:
+        messages.info(request, 'OPS! Você já esta inscrito neste curso.')
     
+    return redirect('dashboard')
+
+@login_required
+def announcements(request, user):
+    course = get_object_or_404(Course, slug=slug)
+    
+    if not request.user.is_staff:
+
+        enrollment = get_object_or_404(Enrollment, user=request.user, course=course)
+        if not enrollment.is_approved():
+            messages.error(request,"Erro inscrição está pendente!")
+            return redirect('dashboard')
+
+    template = 'courses.announcements.html'
+    context = {}
+
+    return render(request, template, context)
+

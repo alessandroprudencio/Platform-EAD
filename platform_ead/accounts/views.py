@@ -15,6 +15,11 @@ from django.contrib.auth.decorators import login_required
 
 from .models import PasswordReset
 
+from platform_ead.courses.models import Enrollment
+
+from django.contrib import messages
+
+
 from platform_ead.core.utils  import generate_hash_key
 
 User = get_user_model()
@@ -66,7 +71,8 @@ def password_reset_confirm(request, key):
 @login_required
 def dashboard(request):
     template_name = 'dashboard/dashboard.html'
-    return render (request, template_name)
+    context = {}
+    return render (request, template_name, context)
 
 @login_required
 def edit(request):
@@ -74,20 +80,12 @@ def edit(request):
     context = {}
     if request.method == 'POST':
         form = EditAccountForm(request.POST, instance=request.user)
-        print(form)
         if form.is_valid():
-            form = EditAccountForm(instance=request.user)
-            form = PasswordChangeForm(data=request.POST, user=request.user)
-            print('ENTRIU')
-            if form.errors:
-                 context['success'] = False
-            else:
-                form.save()
-                context['success'] = True
-                return redirect(settings.DASHBOARD_URL)
+            form.save()
+            messages.success(request, 'Dados foram alterados com sucesso!')
+            return redirect('dashboard')
         else:
-            print('NÃO FORM.IS_VALID()')
-            form = EditAccountForm(instance=request.user)
+            messages.error(request, 'Error ao atualizar dados!')
         context['form'] = form
 
     return render(request, template_name,context)

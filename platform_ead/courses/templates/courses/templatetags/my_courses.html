@@ -1,0 +1,11 @@
+<div class="col-xs-6 col-sm-3">
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <b>Cursos:</b>
+            {% for enrollment in enrollments %}
+            <a href="{% url 'announcements' enrollment.course.slug %}"><h3><img width="25" src="{{ enrollment.course.image.url  }}" /> {{ enrollment.course}}</a> </h3>
+            {% endfor %}
+            <br /><br /><br /><br />
+        </div>
+    </div>
+</div>

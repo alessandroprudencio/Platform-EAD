@@ -39,7 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = "Usuários"
 
 class PasswordReset(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Usuário',on_delete = models. PROTECT,  related_name='resets')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Usuário',on_delete = models. CASCADE,  related_name='resets')
 
     key = models.CharField('Chave', max_length=100, unique=True)
     created_at = models.DateField("Criado em", auto_now_add=True)

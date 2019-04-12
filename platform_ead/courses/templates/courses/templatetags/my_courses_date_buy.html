@@ -1,0 +1,11 @@
+<div class="col-xs-6 col-sm-3">
+        <div class="panel panel-danger">
+                <div class="panel-body">
+                        <b>Data da Compra:</b>
+                        {% for enrollment in enrollments %}
+                                <h3>{{enrollment.course.created_at.date}}</h3>
+                        {% endfor %}
+                        <br /><br /><br /><br />
+                </div>
+        </div>
+</div>
