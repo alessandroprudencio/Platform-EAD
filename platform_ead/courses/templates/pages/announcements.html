@@ -1,5 +1,10 @@
 {% extends "dashboard/dashboard.html" %}
 
+{% block breadcrumb %}
+{{ block.super }}
+  <a href="">/ {{course.name | upper   }}</a>
+{% endblock %}
+
 {% block dashboard_content %}
   {% csrf_token %}
 <div class="panel-heading">
