@@ -9,6 +9,5 @@ urlpatterns = [
     path('sair', auth_views.LogoutView.as_view(template_name='login/login.html', next_page='/'),name="logout"),
     path('editar',views.edit  ,name="edit"),
     path('recuperar_senha',views.password_reset  ,name="password_reset"),
-    path('nova_senha/<key>/',views.password_reset_confirm  ,name="password_reset_confirm"),
-    
+    path('nova_senha/<key>/',views.password_reset_confirm  ,name="password_reset_confirm"),    
 ]

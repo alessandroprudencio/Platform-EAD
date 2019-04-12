@@ -15,10 +15,12 @@ class Course(models.Model):
     description = models.TextField('Descrição', blank=True)
     start_date = models.DateField('Data de Inicio', null=True, blank=True)
     image = models.ImageField(upload_to='courses/image',null=True, blank=True, verbose_name="Image")
-    author = models.CharField('Author ',max_length=100, blank=False, null=False)
-    price =  models.DecimalField(max_digits=6, decimal_places=2, blank=True, default = 0)
+    author = models.CharField('Autor ',max_length=100, blank=False, null=False)
+    price =  models.DecimalField(max_digits=6, decimal_places=2, blank=True, default = 0, verbose_name="Preço")
     created_at = models.DateTimeField('Criado em ', auto_now_add=True)
     update_at = models.DateTimeField('Atualizado em ', auto_now=True)
+    introductory_video= models.FileField(upload_to='courses/videos', null=True, verbose_name="Video de Introdução")
+
 
     objects = CourseManager()
 
@@ -26,7 +28,7 @@ class Course(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return "/cursos/%s" %(self.slug)
+        return "/cursos/%s" %(self.name)
 
     class Meta:
         verbose_name = "Curso"
@@ -42,21 +44,21 @@ class Enrollment(models.Model):
         )
 
         user = models.ForeignKey(
-            settings.AUTH_USER_MODEL, 
+            settings.AUTH_USER_MODEL,
             verbose_name='Usuário',
-            on_delete = models.CASCADE,  
+            on_delete = models.CASCADE,
             related_name='enrollments')
 
         course =  models.ForeignKey(
             Course,
             verbose_name='Curso',
-            on_delete = models.CASCADE,  
+            on_delete = models.CASCADE,
             related_name='enrollments')
-    
+
         status = models.IntegerField(
-            'Situação', 
-            choices=STATUS_CHOICES, 
-            default=1, 
+            'Situação',
+            choices=STATUS_CHOICES,
+            default=1,
             blank=True)
 
         created_at = models.DateTimeField('Inscrito em ', auto_now_add=True)

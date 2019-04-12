@@ -55,6 +55,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -125,7 +126,7 @@ EMAIL_USE_TLS = 'True'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'alessandroconectado@gmail.com'
 EMAIL_HOST_PASSWORD ='07208015163'
-EMAIL_PORT = 587 
+EMAIL_PORT = 587
 
 CONTACT_EMAIL = 'alessandroconectado@gmail.com'
 

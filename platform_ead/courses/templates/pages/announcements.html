@@ -1,7 +1,24 @@
-{% extends "base.html" %}
+{% extends "dashboard/dashboard.html" %}
 
 {% block dashboard_content %}
+  {% csrf_token %}
+<div class="panel-heading">
+   {{course.name}} <a href="{% url 'dashboard'  %}" style="margin-left: 72%;">Cancelar</a>
+</div>
 
-    teste
+<div class="panel-body">
+<h3>Lets GO! Vamos começar, abaixo sua primeira aula de <i>{{course.name}}</i></h3>
+  {% if course.introductory_video %}
+    <video width="640" height="auto" controls>
+      <source src="{{course.introductory_video.url}}" type="video/mp4">
+    </video>
+  {% endif %}
 
-{% endblock %}
+  <a href="{% url 'undo_enrollment' course.name %}">
+  <button type="submit" class="btn waves-effect waves-light  red darken-1" type="submit" name="action">Cancelar Inscrição
+    <i class="material-icons right">send</i>
+  </button>
+    </a>
+  <br />
+</div>
+    {% endblock %}

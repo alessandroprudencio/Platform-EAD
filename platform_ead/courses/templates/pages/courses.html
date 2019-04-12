@@ -4,21 +4,19 @@
 
 {% load static %}
 
-<div class="content-ribbon">
     <div class="pure-u-1">
         <div class="l-box">
             <h4 class="title-course">O que aprender hoje?</h4>
         </div>
     </div>
-</div>
 
 {% for course in courses %}
 
-<div class="container-course">
-        <div>
+<div style="  text-align: center;" class="container-course">
+        <div class="image-preview-course">
             <a href="{{ course.get_absolute_url }}">
             {% if  course.image %}
-                <img width="150" style="  min-width: 150px;  max-width: 150px;" src="{{course.image.url }}" alt="" />
+                <img  src="{{course.image.url }}" alt="" />
             {% else %}
                 <img width="192" src="{% static 'preview/sem_img.png' %}" alt="" />
             {% endif %}
@@ -27,15 +25,15 @@
     <div class="pure-u">
         <div class="l-box">
             <p class="content-subhead-course"><a href="{{ course.get_absolute_url }}" title="">{{course.name}}</a></p>
-            <a class="content-subhead-course-author" href="" title="">{{course.author}} - {{course.created_at}}</a>          
-           <a href="{% url 'enrollments' course.slug %}"><button class="btn waves-effect waves-light" type="submit" name="action">INSCREVA-SE
+            <a class="content-subhead-course-author" href="" >{{course.author}} - {{course.created_at.date}}</a>
+           <a href="{% url 'enrollments' course.name %}"><button class="btnInscreva-se btn waves-effect waves-light" type="submit" name="action">INSCREVA-SE
                 <i class="material-icons right">send</i>
               </button>
             </a>
-                    
+
         </div>
     </div>
-    
+
 </div>
 
 {% empty %}

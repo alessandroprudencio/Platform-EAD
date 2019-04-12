@@ -46,7 +46,7 @@ def password_reset(request):
     template_name = 'reset/reset_password.html'
     context = {}
     form = PasswordResetForm(request.POST or None)
-    if form.is_valid(): 
+    if form.is_valid():
         form.save()
         context['success'] =True
 

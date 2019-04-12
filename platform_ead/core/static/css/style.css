@@ -18,13 +18,12 @@ nav ul a:hover{
 text-decoration: none;
 color: white
 }
- 
+
 .l-box {
     padding: 1em;
 }
 .header {
     margin: 0 0;
-
 }
 ul:not(.browser-default){
     margin-right: 15px;
@@ -66,7 +65,7 @@ body .primary-button {
 }
 
 .content .content-ribbon {
-    margin: 4em;
+    margin: 3em;
     margin-left: 2em;
     border-bottom: 1px solid #eee;
     display: block;
@@ -102,7 +101,7 @@ body .primary-button {
 }
 
 .content-ribbon .container-course{
-    text-align: center;   
+    text-align: center;
     width: 300px;
     height: 300px;
     -webkit-border-radius: 2px;
@@ -123,15 +122,36 @@ body .primary-button {
     font-weight: 500;
     margin: 0;
     margin-bottom: 10%;
-} 
+}
 
 .nav ul {
 font-size: 2px;
 }
 
+nav a:click{
+  text-decoration: none
+}
+
 a.content-subhead-course-author{
     color: #666;
-    font-size: 0.6rem;
+    font-size: 12px;
+}
+.image-preview-course{
+    max-width: 150px;
+    min-width: 150px;
+    max-height: 150px;
+    min-height: 150px;
+    margin-left: 22%;
+}
+.container-course{
+    margin: 10px;
+    box-sizing: border-box;
+}
+
+.container-course .btnInscreva-se{
+  text-align: center;
+  margin: 10px;
+
 }
 .img{
     margin-left:89%;
@@ -142,12 +162,12 @@ a.content-subhead-course-author{
     width: 50%;
     margin: 0 auto;
   }
-  
+
   .form-contact {
     width: 100%;
     font-family: "Arial", Times, serif;
   }
-  
+
   .form-contact-input {
     width: 100%;
     color: #292929;
@@ -163,7 +183,7 @@ a.content-subhead-course-author{
     border-left: 1px solid #ccc;
     text-indent: 20px;
   }
-  
+
   .form-contact-textarea {
     width: 100%;
     color: #292929;
@@ -183,7 +203,7 @@ a.content-subhead-course-author{
     padding-right: 0;
     font-family: "Arial", Times, serif;
   }
-  
+
   .form-contact-button {
     width: 100%;
     font-size: 18px;
@@ -200,7 +220,7 @@ a.content-subhead-course-author{
     border-right: 1px solid #500707;
     transition: 1s;
   }
-  
+
   .form-contact-button:hover {
     opacity: 1;
   }
@@ -216,4 +236,8 @@ a.content-subhead-course-author{
 }
 .labelColor{
     font-size: 12px;
+}
+
+.color-text-dash{
+  color: #2a6496;
 }

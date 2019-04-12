@@ -1,12 +1,12 @@
-<div class="col-xs-6 col-sm-3">
-        <div class="panel panel-success">
+<div  class="col-xs-6 col-sm-3">
+        <div style="min-height:318px" class="panel panel-success">
                 <div class="panel-body">
                         <b>Preço R$:</b>
                         {% for enrollment in enrollments %}
                         {% if enrollment.course.price == 0 %}
-                                <h3>FREE</h3>
+                                <h4 class="color-text-dash" >FREE</h4><br>
                         {% else %}
-                                <h3>{{ enrollment.course.price }}</h3>
+                                <h4 class="color-text-dash">R$ {{ enrollment.course.price }}</h4><br>
                         {% endif %}
                         {% endfor %}
 
