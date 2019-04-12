@@ -92,7 +92,7 @@ class Announcement(models.Model):
         class Meta:
             verbose_name =  'Anúncio'
             verbose_name_plural = "Anúncios"
-            ordering = ['created_at-']
+            ordering = ['-created_at']
 
 class Comment(models.Model):
         announcement = models.ForeignKey(
