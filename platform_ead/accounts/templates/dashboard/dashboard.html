@@ -3,11 +3,11 @@
 {% load courses_tags %}
 {% block content %}
 <div class="content">
-                <div class="pure-g-r content-ribbon">
-                      <div class="pure-u">
-                         <section class="main">
-                            <section class="tab-content">
-                               <section class="tab-pane active fade in content" id="dashboard">
+                  <div class="pure-g-r content-ribbon">
+                     <div class="pure-u">
+                        <section class="main">
+                           <section class="tab-content">
+                              <section class="tab-pane active fade in content" id="dashboard">
                                   <ul>
                                      <li>
                                         {% block breadcrumb %}
@@ -15,33 +15,35 @@
                                         {% endblock %}
                                      </li>
                                   </ul>
-                                  <div  style="box-sizing:border-box">
+                                  
+                                 <div  style="box-sizing:border-box">
 
-                                       {% my_courses user %}
-                                       {% my_courses_price user %}
-                                       {% my_courses_date_buy user %}
-                                       <div class="col-xs-6 col-sm-3">
-                                          <div class="panel panel-warning">
-                                             <div  style="min-height:318px" id="dash-panel" class="panel-body">
-                                                <b>Super Usário:</b>
-                                                {% if  user.is_superuser %}
-                                                <h4 class="color-text-dash">Sim</h4>
-                                                {% else %}
-                                                <h3>Não</h3>
-                                                {% endif %}
-                                                <br /><br /><br /><br />
-                                             </div>
+                                    {% my_courses user %}
+                                    {% my_courses_price user %}
+                                    {% my_courses_date_buy user %}
+                                   
+                                    <div class="col-xs-6 col-sm-3">
+                                       <div class="panel panel-warning">
+                                          <div  style="min-height:318px" id="dash-panel" class="panel-body">
+                                             <b>Super Usário:</b>
+                                             {% if  user.is_superuser %}
+                                             <h4 class="color-text-dash">Sim</h4>
+                                             {% else %}
+                                             <h3>Não</h3>
+                                             {% endif %}
+                                             <br /><br /><br /><br />
                                           </div>
                                        </div>
+                                    </div>
 
-                                     <div class="col-xs-12 col-sm-8">
-                                        <div class="panel panel-default">
+                                    <div class="col-xs-12 col-sm-8">
                                           {% block dashboard_content %}
-
+                                          
+                                          
                                            {% endblock %}
-                                        </div>
-                                     </div>
-                                     <div class="col-xs-12 col-sm-4">
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-4">
                                         <div class="panel panel-default">
                                            {% block editDashboard %}
                                            <div class="panel-heading">
@@ -52,15 +54,20 @@
                                            </div>
                                            {% endblock %}
                                         </div>
+                                    </div>
 
-                                     </div>
-                                  </div>
-                               </section>
-                         </section>
-                         </<section>
-                         </section>
-                      </div>
-                   </div>
-                </div>
+                                    <div class="col-xs-12 col-sm-4">
+                                          {% block announcements %}
+                                          
+                                          {% endblock %}
+                                    </div>
+
+                                 </div>
+
+                              </section>
+                           </section>
+                        <section>
+                     </div>
+                  </div>
 </div>
 {% endblock %}

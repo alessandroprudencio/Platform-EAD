@@ -79,6 +79,7 @@ def edit(request):
     template_name = 'dashboard/edit.html'
     context = {}
     if request.method == 'POST':
+
         form = EditAccountForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()

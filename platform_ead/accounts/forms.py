@@ -62,5 +62,5 @@ class EditAccountForm(forms.ModelForm):
 
     class Meta:
         model  = User
-        fields = ['username','email', 'name']
+        fields = ['username','email', 'name','photo_profile']
         

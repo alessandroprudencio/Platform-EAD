@@ -1,0 +1,88 @@
+{% extends "dashboard/dashboard.html" %}
+
+{% block breadcrumb %}
+{{ block.super }}
+  <a href="">/ {{course.name | upper   }}</a>
+{% endblock %}
+
+{% block dashboard_content %}
+  {% csrf_token %}
+  <div class="panel panel-default">
+
+<div class="panel-heading">
+   {{course.name}} 
+</div>
+
+  <div class="panel-body">
+          <h5><blockquote>{{announcement.content}}</blockquote></h5>
+
+          <div class="row">
+              <div class="col-md-12">
+                
+                <div class="page-header">
+                  <h1><small class="pull-right">
+
+                          {% with comments_count=announcement.comments.count %}
+                          {{ comments_count }}
+                        
+                          Comentario{{ comments_count|pluralize}}
+                          {% endwith %}
+                  
+                  </small> Comentarios </h1>
+                </div> 
+                
+                  <div class="comments-list">
+                  {% for comment in announcement.comments.all  %}
+<blockquote>
+
+    <div class="media">
+                          
+        <a class="media-left" href="#">
+          
+          <img src="http://lorempixel.com/40/40/people/4/">
+        </a>
+        <div class="media-body">
+            
+          <h4 class="media-heading user_name">{{comment.user}} </h4>
+          <h5> <i>
+          {{comment.comment | linebreaksbr}}
+          </i>
+          </h5>
+          <h5 class="pull-right">{{comment.created_at | timesince}} atrás</h5>
+          <p><small><a href="">Like</a> - <a href="">Share</a></small></p>
+
+        </div>
+      </div>
+</blockquote>
+                  
+                {% empty %}
+                  Nenhum comentário.
+                {% endfor %}
+              
+                  </div>
+              <br>
+              <form method="POST" class="col s12">
+                  {{ form.non_field_errors }}
+      
+                      {% csrf_token %}
+                  
+                    <div class="row">
+                      <div class="input-field col s12">
+                          <i class="material-icons prefix">comment</i>
+                        <textarea name="comment" id="id_comment" class="materialize-textarea" data-length="120"></textarea>
+                        <label for="id_comment">Deixe seu comentario...</label>
+                        <div style="color:red">{{ form.comment.errors }}</div>
+                      </div>
+                 <button class="btn-floating waves-effect waves-light green" ><i class="material-icons">send</i></button>
+                    
+                      
+                </div>
+
+                </form>
+          </div>       
+         
+</div>
+</div>
+</div>
+
+{% endblock %}

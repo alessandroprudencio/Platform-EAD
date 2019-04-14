@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from .models import Course, Enrollment
-from .forms import ContactCourse
+from .forms import ContactCourse, CommentForm
 from django.contrib import messages
 
 def courses(request):
@@ -54,8 +54,41 @@ def announcements(request, name):
     template = 'pages/announcements.html'
     context = {
     'course':course,
+    'announcements':course.announcements.all()
     }
+
     return render(request, template, context)
+
+@login_required
+def comments_view(request, name, pk):
+    course = get_object_or_404(Course, name=name)
+    if not request.user.is_staff:
+        enrollment = get_object_or_404(Enrollment, user=request.user, course=course)
+        if not enrollment.is_approved():
+            messages.error(request,"Erro inscrição está pendente!")
+            return redirect('dashboard')
+    form = CommentForm(request.POST or None)
+    announcement = get_object_or_404(course.announcements.all(), pk=pk)
+    
+
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.user = request.user
+        comment.announcement = announcement
+        comment.save()
+        form = CommentForm() 
+        messages.success(request, 'Seu comentario foi adicionado!')   
+
+    template = 'pages/comments_view.html'
+    context = {
+    'course':course,
+    'announcement':announcement,
+    'form':form
+    }
+
+    return render(request, template, context)
+
+
 
 @login_required
 def enrollment(request, name):

@@ -2,6 +2,8 @@ from django.db import models
 
 from django.conf import settings
 
+from platform_ead.core.mails import send_email_template
+
 class CourseManager(models.Manager):
     def search(self, query):
         return self.get_queryset().filter(
@@ -79,7 +81,8 @@ class Announcement(models.Model):
         course =  models.ForeignKey(
             Course,
             verbose_name='Curso',
-            on_delete = models.CASCADE)
+            on_delete = models.CASCADE,
+            related_name='announcements')
         title = models.CharField('Titulo', max_length=100)
         content = models.TextField('Conteúdo')
 
@@ -115,3 +118,19 @@ class Comment(models.Model):
             verbose_name = 'Comentário'
             verbose_name_plural = 'Comentários'
             ordering = ['created_at']
+
+def post_save_announcement(instance, created, **kwargs):
+        subject = instance.title
+        context = {
+            'announcement':announcement
+        }
+        template_name='courses/announcement_mail.html'
+        enrollments = Enrollment.objects.filter(
+            course=announcement.course,
+            status=1
+            )
+        for enrollment in enrollments:
+                recipient_list=[enrollment.user.email] 
+                send_email_template(subject, template_name, content, announcement)
+
+models.signals.post_save.connect(post_save_announcement,sender=Announcement, dispatch_uid='post_save_announcement')

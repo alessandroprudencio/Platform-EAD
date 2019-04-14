@@ -6,24 +6,31 @@
 {% endblock %}
 
 {% block dashboard_content %}
-  {% csrf_token %}
-<div class="panel-heading">
-   {{course.name}} <a href="{% url 'dashboard'  %}" style="margin-left: 72%;">Cancelar</a>
-</div>
 
-<div class="panel-body">
-<h3>Lets GO! Vamos começar, abaixo sua primeira aula de <i>{{course.name}}</i></h3>
-  {% if course.introductory_video %}
-    <video width="640" height="auto" controls>
-      <source src="{{course.introductory_video.url}}" type="video/mp4">
-    </video>
-  {% endif %}
+{% for announcement in announcements %}
 
-  <a href="{% url 'undo_enrollment' course.name %}">
-  <button type="submit" class="btn waves-effect waves-light  red darken-1" type="submit" name="action">Cancelar Inscrição
-    <i class="material-icons right">send</i>
-  </button>
-    </a>
-  <br />
+<div class="panel panel-default">
+  <div class="panel-heading">
+      Anuncios: 
+  </div>
+  <div class="panel-body">
+        <h5><strong>{{announcement.title}}</strong></h5>
+        <p>{{announcement.content| linebreaks }}</p>
+        <i>{{announcement.created_at}}</i>
+        <p>
+          <a href="{% url 'comments_view' course.name announcement.pk  %}">
+              <i style="margin-top:15px;  font-size:18px" class="material-icons">announcement</i>
+        {% with comments_count=announcement.comments.count %}
+        {{ comments_count }}
+      
+        Comentario{{ comments_count|pluralize}}
+        {% endwith %}
+      </a>
+      </p>
+  </div>
 </div>
-    {% endblock %}
+{% empty %}
+Nenhum Anuncio
+{% endfor %}
+
+{% endblock %}

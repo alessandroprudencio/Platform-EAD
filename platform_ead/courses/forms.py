@@ -1,9 +1,11 @@
+from django.core.mail import send_mail
 from django import forms
 
-from django.core.mail import send_mail
-from django.conf import settings
 
 from platform_ead.core.mails import send_email_template
+from django.conf import settings
+
+from .models import Comment
 
 class ContactCourse(forms.Form):
 
@@ -23,3 +25,10 @@ class ContactCourse(forms.Form):
         template_name = 'pages/contact_email.html'
 
         send_email_template(subject, template_name,  context ,[settings.CONTACT_EMAIL])
+
+
+class CommentForm(forms.ModelForm):
+    
+    class Meta:
+        model = Comment
+        fields = ['comment']

@@ -12,6 +12,8 @@ def my_courses(user):
     }
     return context  
 
+
+
 @register.inclusion_tag('courses/templatetags/my_courses_price.html')
 def my_courses_price(user):
     enrollments = Enrollment.objects.filter(user=user)

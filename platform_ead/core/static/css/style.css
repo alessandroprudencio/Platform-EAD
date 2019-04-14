@@ -229,7 +229,10 @@ a.content-subhead-course-author{
     position: fixed;
     margin-left: 73%;
 }
-
+.input-field.col label{
+    font-size: 13px;
+    font-weight: 100;
+}
 .input-field>label{
     font-size: 13px;
     color: black;
@@ -240,4 +243,14 @@ a.content-subhead-course-author{
 
 .color-text-dash{
   color: #2a6496;
+}
+.user_name{
+    font-size:14px;
+    font-weight: bold;
+}
+.comments-list .media{
+    border-bottom: 1px dotted #ccc;
+}
+.media-left{
+    padding: 8px;
 }
