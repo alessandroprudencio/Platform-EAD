@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponse
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
-from .models import Course, Enrollment, Lesson
+from .models import Course, Enrollment,Announcement, Lesson
 from .forms import ContactCourse, CommentForm
 from django.contrib import messages
 from .decorators import enrollment_required
@@ -56,13 +56,29 @@ def announcements(request, name):
 
 @login_required
 @enrollment_required
-def video_classes(request, name, pk):
+def video_classes(request, name):
+    course = request.course
+    #lesson = get_object_or_404(Lesson, pk=pk, course=course)
+    lessons = course.release_lessons()
+    if request.user.is_staff:
+        lessons = course.lessons.all()
+    template = 'pages/video_classes.html'
+    context = {
+        'course':course,
+        'lessons':lessons
+    }
+
+    return render(request, template, context)
+
+@login_required
+@enrollment_required
+def lesson(request, name, pk):
     course = request.course
     lesson = get_object_or_404(Lesson, pk=pk, course=course)
     if not request.user.is_staff and not lesson.is_available():
         messages.error(request,' Essa aula não esta disponivel')
-        return redirect('pages/videos_classes.html', name=name)
-    template = 'pages/video_classes.html'
+        return redirect('pages/videos_classes.html', name=course.name)
+    template = 'pages/video_classes_view.html'
     context = {
     'course':course,
     'lesson':lesson
@@ -76,15 +92,14 @@ def comments_view(request, name, pk):
     course = request.course
     form = CommentForm(request.POST or None)
     announcement = get_object_or_404(course.announcements.all(), pk=pk)
-    
 
     if form.is_valid():
         comment = form.save(commit=False)
         comment.user = request.user
         comment.announcement = announcement
         comment.save()
-        form = CommentForm() 
-        messages.success(request, 'Seu comentario foi adicionado!')   
+        form = CommentForm()
+        messages.success(request, 'Seu comentario foi adicionado!')
 
     template = 'pages/comments_view.html'
     context = {

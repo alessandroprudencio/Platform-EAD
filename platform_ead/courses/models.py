@@ -30,7 +30,7 @@ class Course(models.Model):
 
     def get_absolute_url(self):
         return "/cursos/%s" %(self.name)
-    
+
     def release_lessons(self):
         today = timezone.now().date()
         return self.lessons.filter(release_date__gte=today)
@@ -135,7 +135,7 @@ def post_save_announcement(instance, created, **kwargs):
                 status=1
                 )
             for enrollment in enrollments:
-                    recipient_list=[enrollment.user.email] 
+                    recipient_list=[enrollment.user.email]
                     send_email_template(subject, template_name, context, recipient_list)
 
 models.signals.post_save.connect(post_save_announcement,sender=Announcement, dispatch_uid='post_save_announcement')
@@ -177,7 +177,7 @@ class Material(models.Model):
         name  = models.CharField('Nome da Aula', max_length=100, blank=True)
         embedded = models.TextField('Video Embedded', blank=True)
         file =  models.FileField(upload_to="lessons/materials", blank=True, null=True)
-        
+
         lesson = models.ForeignKey(
             Lesson,
             verbose_name="aula",
@@ -188,7 +188,7 @@ class Material(models.Model):
 
         def is_embedded(self):
             return bool(self.embedded)
-        
+
         def __str__(self):
             return self.name
 

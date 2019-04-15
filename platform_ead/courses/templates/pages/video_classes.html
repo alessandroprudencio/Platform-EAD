@@ -1,23 +1,22 @@
 {% extends "dashboard/dashboard.html" %}
 
 {% block breadcrumb %}
-{{ block.super }}
-  <a href="">/ {{course.name | upper   }}</a>
+  {{ block.super }}
+  / AULAS / {{course.name | upper }}
 {% endblock %}
 
 {% block dashboard_content %}
 
-{% for lesson in course.release_lessons %}
+{% for lesson in lessons %}
 
 <div class="panel panel-default">
-  
+
         <div class="panel-heading">
            <strong>{{lesson}}</strong>
         </div>
   <div class="panel-body">
-      <video width="750" height="auto" controls>
-          <source src="">
-        </video>
+      <p>{{lesson.description}}  <a href="{% url 'lesson' course.name lesson.pk %}">Acessar Aula</a></p>
+
   </div>
 
 
@@ -26,7 +25,7 @@
 {% empty %}
 
 <div class="panel panel-default">
-  
+
     <div class="panel-heading">
        <strong>Videos-Aulas</strong>
     </div>
@@ -38,6 +37,5 @@
 </div>
 
 {% endfor %}
-
 
 {% endblock %}

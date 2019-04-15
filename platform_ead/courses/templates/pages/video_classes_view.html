@@ -1,0 +1,26 @@
+{% extends "dashboard/dashboard.html" %}
+
+
+{% block breadcrumb %}
+  {{ block.super }}
+  <a href="#">/ AULAS / </a> <a href="{% url 'video_classes' course.name %}">{{course.name | upper }} </a>/ {{lesson | upper}} 
+{% endblock %}
+
+
+{% block dashboard_content %}
+  {% for material in  lesson.materials.all %}
+  <div class="panel panel-default">
+
+          <div class="panel-heading">
+             <strong>{{material}}</strong>
+          </div>
+    <div class="panel-body">
+        <video width="750" height="auto" controls>
+            <source src="{{material.file.url}}">
+          </video>
+    </div>
+
+
+  </div>
+  {% endfor %}
+{% endblock %}
