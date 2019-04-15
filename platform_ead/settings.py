@@ -27,9 +27,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #libs
+    'taggit',
+    #apps
     'platform_ead.core',
     'platform_ead.courses',
-    'platform_ead.accounts'
+    'platform_ead.accounts',
+    'platform_ead.forum'
 ]
 
 MIDDLEWARE = [

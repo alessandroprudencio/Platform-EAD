@@ -39,6 +39,7 @@
                     <li><a href="{% url 'contact' %}">CONTATO</a></li>
                     {% if user.is_authenticated %}
                     | {{user|  upper}} <img width="25" src="{{ accounts.photo_profile.url }}"/>
+                    <li><a href="{% url 'forum' %}">FÓRUM</a></li>
                     <li><a href="{% url 'dashboard' %}">MEU PERFIL</a></li>
                     <li><a href="{% url 'logout' %}">SAIR</a></li>
                     {% else %}

@@ -12,6 +12,7 @@ urlpatterns = [
     path('', include('platform_ead.core.urls')),
     path('conta/', include('platform_ead.accounts.urls')),
     path('cursos/', include('platform_ead.courses.urls')),
+    path('forum/', include('platform_ead.forum.urls')),
 
 ]
 

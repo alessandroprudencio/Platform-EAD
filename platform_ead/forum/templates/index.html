@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content">
+                  <div class="pure-g-r content-ribbon">
+                     <div class="pure-u-1">
+                        <section class="main">
+                           <section class="tab-content">
+                              <section class="tab-pane active fade in content" id="dashboard">
+                                  <ul>
+                                     <li>
+                                        {% block breadcrumb %}
+                                        <a href="{% url 'home' %}">INICIO</a>
+                                        <a href="{% url 'forum' %}"> / FÓRUM</a>
+                                        {% endblock %}
+                                     </li>
+                                  </ul>
+
+                                  {% for thread in object_list %}
+
+                                    <div class="col-xs-6 col-sm-8">
+                                      <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                           <strong>{{thread.title}}</strong>
+                                        </div>
+                                        <div class="panel-body">
+                                              <!-- <h5><strong>{{announcement.title}}</strong></h5> -->
+                                              <h3>{{thread.body}}</h3> <a href="">leia mais </a></p><br>
+
+                                              <strong>
+                                              <i>Criado por {{thread.author}} | {{thread.answers}} Resposta{{thread.answers|pluralize}} | {{thread.views}} Visualizaç{{ thread.views | pluralize:"ão,ões" }} </i>
+                                              <p>
+                                                <a href="">
+                                                    <i style="margin-top:15px;  font-size:18px" class="material-icons">label</i>
+                                            </a>
+                                            </strong>
+                                            <i>Tags:</i>
+                                            {% for tag in thread.tags.all %}
+                                            <i><a href="{% url 'index_tagged' tag.name %}">{{tag}}</a></i>{% if not forloop.last %},{% endif %}
+                                            {% endfor %}
+                                            <a style="text-decoration:none;cursor:unset;margin-left:40%">Atualizado a {{thread.update_at|timesince}} atrás</a>
+                                            </p>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    {% empty %}
+                                    <div class="col-xs-6 col-sm-8">
+                                      <div class="panel panel-default">
+                                        <div class="panel-body">
+                                          <p>Nenhuma duvida ainda!</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    {% endfor %}
+
+                                    <div class="col-xs-6 col-sm-4">
+                                        <div class="panel panel-default">
+                                           <div class="panel-heading">
+                                             TÓPICOS
+                                           </div>
+                                           <div class="panel-body">
+                                             <a href="?order=">  <i style="font-size:15px;" class="material-icons">update</i>  Mais Recentes <br><br></a>
+                                             <a href="?order=views"><i style="font-size:15px;" class="material-icons">visibility</i>    Mais Visualizados <br><br></a>
+                                             <a href="?order=answers"><i style="font-size:15px;" class="material-icons">insert_comment</i>  Mais Comentados <br><br></a>
+                                           </div>
+                                           <div class="panel-heading">
+                                              TAGS
+                                           </div>
+                                           <div class="panel-body">
+                                             {% for tag in tags %}
+                                             <a  href="{% url 'index_tagged' tag.name %}"><i style="font-size:15px;" class="material-icons">label</i> {{tag}}<br><br></a>
+                                             {% endfor %}
+                                           </div>
+                                        </div>
+                                    </div>
+
+
+                              </section>
+                           </section>
+                        <section>
+                     </div>
+
+                                          <ul class="pagination">
+                                            {% if page_obj.has_previous %}
+                                             <li><a href="?page={{page_obj.previous_page_number}}{% if request.GET.order %}&order={{request.GET.order}}{% endif %}"><i class="material-icons">chevron_left</i></a></li>
+                                            {% endif %}
+                                            {% for page in paginator.page_range %}
+                                            <li {% if page == page_obj.number %} class="active"{% endif %}><a href="?page={{ page}}{% if request.GET.order %}&order={{request.GET.order}}{% endif %}">{{page  }}</a></li>
+                                            {% endfor %}
+                                            {% if page_obj.has_next %}
+                                             <li ><a href="?page={{page_obj.next_page_number}}{% if request.GET.order %}&order={{request.GET.order}}{% endif %}"><i class="material-icons">chevron_right</i></a></li>
+                                            {% endif %}
+                                          </ul>
+                  </div>
+</div>
+{% endblock %}
