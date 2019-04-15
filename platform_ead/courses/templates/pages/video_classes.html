@@ -1,0 +1,43 @@
+{% extends "dashboard/dashboard.html" %}
+
+{% block breadcrumb %}
+{{ block.super }}
+  <a href="">/ {{course.name | upper   }}</a>
+{% endblock %}
+
+{% block dashboard_content %}
+
+{% for lesson in course.release_lessons %}
+
+<div class="panel panel-default">
+  
+        <div class="panel-heading">
+           <strong>{{lesson}}</strong>
+        </div>
+  <div class="panel-body">
+      <video width="750" height="auto" controls>
+          <source src="">
+        </video>
+  </div>
+
+
+</div>
+
+{% empty %}
+
+<div class="panel panel-default">
+  
+    <div class="panel-heading">
+       <strong>Videos-Aulas</strong>
+    </div>
+<div class="panel-body">
+    Nenhuma aula disponivel
+</div>
+
+
+</div>
+
+{% endfor %}
+
+
+{% endblock %}

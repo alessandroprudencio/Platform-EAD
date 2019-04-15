@@ -2,6 +2,8 @@ from django.db import models
 
 from django.conf import settings
 
+from django.utils import timezone
+
 from platform_ead.core.mails import send_email_template
 
 class CourseManager(models.Manager):
@@ -20,8 +22,6 @@ class Course(models.Model):
     price =  models.DecimalField(max_digits=6, decimal_places=2, blank=True, default = 0, verbose_name="Preço")
     created_at = models.DateTimeField('Criado em ', auto_now_add=True)
     update_at = models.DateTimeField('Atualizado em ', auto_now=True)
-    introductory_video= models.FileField(upload_to='courses/videos', null=True, verbose_name="Video de Introdução")
-
 
     objects = CourseManager()
 
@@ -30,6 +30,10 @@ class Course(models.Model):
 
     def get_absolute_url(self):
         return "/cursos/%s" %(self.name)
+    
+    def release_lessons(self):
+        today = timezone.now().date()
+        return self.lessons.filter(release_date__gte=today)
 
     class Meta:
         verbose_name = "Curso"
@@ -120,17 +124,74 @@ class Comment(models.Model):
             ordering = ['created_at']
 
 def post_save_announcement(instance, created, **kwargs):
-        subject = instance.title
-        context = {
-            'announcement':announcement
-        }
-        template_name='courses/announcement_mail.html'
-        enrollments = Enrollment.objects.filter(
-            course=announcement.course,
-            status=1
-            )
-        for enrollment in enrollments:
-                recipient_list=[enrollment.user.email] 
-                send_email_template(subject, template_name, content, announcement)
+        if created:
+            subject = instance.title
+            context = {
+                'announcement':instance
+            }
+            template_name='pages/announcement_email.html'
+            enrollments = Enrollment.objects.filter(
+                course=instance.course,
+                status=1
+                )
+            for enrollment in enrollments:
+                    recipient_list=[enrollment.user.email] 
+                    send_email_template(subject, template_name, context, recipient_list)
 
 models.signals.post_save.connect(post_save_announcement,sender=Announcement, dispatch_uid='post_save_announcement')
+
+class Lesson(models.Model):
+
+        name  = models.CharField('Nome', max_length=100)
+        description = models.TextField('Descrição',blank=True)
+        number  = models.IntegerField('Número (ordem)', blank=True, default=0)
+        release_date = models.DateField('Data de Liberação', blank=True, null=True)
+
+        course = models.ForeignKey(
+            Course,
+            verbose_name='Curso',
+            on_delete = models.CASCADE,
+            related_name="lessons"
+            )
+
+        created_at = models.DateTimeField('Data do comentário ', auto_now_add=True)
+        update_at = models.DateTimeField('Comentário atualizado em ', auto_now=True)
+
+        def __str__(self):
+            return self.name
+
+        def is_available(self):
+            if self.release_date:
+                today = timezone.now().date()
+                return self.release_date >= today
+            return False
+
+        class Meta:
+            verbose_name="Aula"
+            verbose_name_plural = "Aulas"
+            ordering = ['number']
+
+
+class Material(models.Model):
+
+        name  = models.CharField('Nome da Aula', max_length=100, blank=True)
+        embedded = models.TextField('Video Embedded', blank=True)
+        file =  models.FileField(upload_to="lessons/materials", blank=True, null=True)
+        
+        lesson = models.ForeignKey(
+            Lesson,
+            verbose_name="aula",
+            related_name="materials",
+            on_delete = models.CASCADE,
+
+        )
+
+        def is_embedded(self):
+            return bool(self.embedded)
+        
+        def __str__(self):
+            return self.name
+
+        class Meta:
+            verbose_name = "Material"
+            verbose_name_plural = "Materiais"

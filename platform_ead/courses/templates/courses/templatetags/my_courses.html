@@ -2,9 +2,25 @@
     <div style="min-height:300px"  class="panel panel-primary">
         <div class="panel-body">
             <b>Cursos:</b>
+            <div class="color-text-dash">
             {% for enrollment in enrollments %}
-              <a href="{% url 'announcements' enrollment.course.name %}"><h4 class="color-text-dash"><img width="25" src="{{ enrollment.course.image.url  }}" /> {{ enrollment.course}}</h4></a><br>
-            {% endfor %}
+                <br>
+            <a class="color-text-dash" href="{% url 'announcements' enrollment.course.name %}">
+                      <img width="25" src="{{ enrollment.course.image.url  }}" /> 
+                      {{ enrollment.course}}
+            </a>
+
+            <a  style="margin-right: 10%" href="{% url 'announcements' enrollment.course.name %}">
+             <i style="background-position-x: right; font-size:18px" alt="anuncios" class="material-icons">announcement</i>
+            </a>
+
+            <a  style="margin-right: 10%" href="{% url 'video_classes' enrollment.course.name enrollment.course.pk %}">
+                <i style="font-size:18px" alt="anuncios" class="material-icons">video_library</i>
+            </a>
+                   <br>
+              {% endfor %}
+            </div>
+
             <br /><br /><br /><br />
         </div>
     </div>

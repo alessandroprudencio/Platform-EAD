@@ -2,9 +2,10 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.http import HttpResponse
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
-from .models import Course, Enrollment
+from .models import Course, Enrollment, Lesson
 from .forms import ContactCourse, CommentForm
 from django.contrib import messages
+from .decorators import enrollment_required
 
 def courses(request):
     courses = Course.objects.all()
@@ -42,15 +43,9 @@ def details(request, name):
     return render(request,templateName,context)
 
 @login_required
+@enrollment_required
 def announcements(request, name):
-    course = get_object_or_404(Course, name=name)
-
-    if not request.user.is_staff:
-        enrollment = get_object_or_404(Enrollment, user=request.user, course=course)
-        if not enrollment.is_approved():
-            messages.error(request,"Erro inscrição está pendente!")
-            return redirect('dashboard')
-
+    course = request.course
     template = 'pages/announcements.html'
     context = {
     'course':course,
@@ -60,13 +55,25 @@ def announcements(request, name):
     return render(request, template, context)
 
 @login_required
+@enrollment_required
+def video_classes(request, name, pk):
+    course = request.course
+    lesson = get_object_or_404(Lesson, pk=pk, course=course)
+    if not request.user.is_staff and not lesson.is_available():
+        messages.error(request,' Essa aula não esta disponivel')
+        return redirect('pages/videos_classes.html', name=name)
+    template = 'pages/video_classes.html'
+    context = {
+    'course':course,
+    'lesson':lesson
+    }
+
+    return render(request, template, context)
+
+@login_required
+@enrollment_required
 def comments_view(request, name, pk):
-    course = get_object_or_404(Course, name=name)
-    if not request.user.is_staff:
-        enrollment = get_object_or_404(Enrollment, user=request.user, course=course)
-        if not enrollment.is_approved():
-            messages.error(request,"Erro inscrição está pendente!")
-            return redirect('dashboard')
+    course = request.course
     form = CommentForm(request.POST or None)
     announcement = get_object_or_404(course.announcements.all(), pk=pk)
     

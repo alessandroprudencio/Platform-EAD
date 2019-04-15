@@ -11,15 +11,16 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-      Anuncios: 
+     <strong>{{announcement.title}}</strong>
   </div>
   <div class="panel-body">
-        <h5><strong>{{announcement.title}}</strong></h5>
-        <p>{{announcement.content| linebreaks }}</p>
+        <!-- <h5><strong>{{announcement.title}}</strong></h5> -->
+        <p>{{announcement.content| truncatewords:'60' }} <a href="{% url 'comments_view' course.name announcement.pk  %}">leia mais </a></p>
+        
         <i>{{announcement.created_at}}</i>
         <p>
           <a href="{% url 'comments_view' course.name announcement.pk  %}">
-              <i style="margin-top:15px;  font-size:18px" class="material-icons">announcement</i>
+              <i style="margin-top:15px;  font-size:18px" class="material-icons">comment</i>
         {% with comments_count=announcement.comments.count %}
         {{ comments_count }}
       
