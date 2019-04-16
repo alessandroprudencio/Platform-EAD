@@ -15,7 +15,7 @@
   </div>
   <div class="panel-body">
         <!-- <h5><strong>{{announcement.title}}</strong></h5> -->
-        <p>{{announcement.content| truncatewords:'60' }} <a href="{% url 'comments_view' course.name announcement.pk  %}">leia mais </a></p>
+        <p>{{announcement.content| truncatewords:'50' }} <a href="{% url 'comments_view' course.name announcement.pk  %}">leia mais </a></p>
         
         <i>{{announcement.created_at}}</i>
         <p>

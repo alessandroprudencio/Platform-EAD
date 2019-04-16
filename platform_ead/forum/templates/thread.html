@@ -1,0 +1,78 @@
+{% extends 'index.html' %}
+{% block breadcrumb %}
+{{block.super}}
+<a href="#"> / {{thread.title | capfirst}}</a>
+{% endblock %}
+{% block thread_content %}
+<div class="col-xs-6 col-sm-8">
+   <div class="panel panel-default">
+      <div class="panel-heading">
+         <strong>{{thread.title | capfirst}}</strong>
+      </div>
+      <div class="panel-body">
+         <!-- <h5><strong>{{announcement.title}}</strong></h5> -->
+         <h5>
+            <blockquote>{{thread.body| capfirst}}</blockquote>
+         </h5>
+         <br>
+         <strong>
+            <i style="font-weight:100">Criado por {{thread.author}} | {{thread.answers}} Resposta{{thread.answers|pluralize}} | {{thread.views}} Visualizaç{{ thread.views | pluralize:"ão,ões" }} </i>
+            <p>
+               <a href="">
+               <i style="margin-top:15px;  font-size:18px" class="material-icons">label</i>
+               </a>
+         </strong>
+         <i>Tags:</i>
+         {% for tag in thread.tags.all %}
+         <i><a href="{% url 'index_tagged' tag.name %}">{{tag}}</a></i>{% if not forloop.last %},{% endif %}
+         {% endfor %}
+         <a style="text-decoration:none;cursor:unset;margin-left:40%">Atualizado a {{thread.update_at|timesince}} atrás</a>
+         </p>
+         <div class="page-header">
+            <h1><small class="pull-right">
+               {% with comments_count=announcement.comments.count %}
+               {{ comments_count }}
+               Comentario{{ comments_count|pluralize}}
+               {% endwith %}
+               </small> Resposta 
+            </h1>
+         </div>
+         <div class="comments-list">
+          {% for reply in obejct.replies.all  %}
+         <blockquote>
+         <div class="media">
+            <a class="media-left" href="#">
+            <img src="http://lorempixel.com/40/40/people/4/">
+            </a>
+            <div class="media-body">
+               <h4 class="media-heading user_name">{{reply.user}} </h4>
+               <h5> <i>
+                  {{reply.reply | linebreaksbr}}
+                  </i>
+               </h5>
+               <h5 class="pull-right">{{reply.created_at | timesince}} atrás</h5>
+               <p><small><a href="">Like</a> - <a href="">Share</a></small></p>
+            </div>
+         </div>
+         </blockquote>
+          {% empty %}
+                  Nenhum resposta.
+                {% endfor %}         </div>
+      </div>
+      <br>
+      <form method="post" class="col s12">
+         {{ form.non_field_errors }}
+         {% csrf_token %}
+         <div class="row">
+            <div class="input-field col s12">
+               <i class="material-icons prefix">comment</i>
+               <textarea name="reply" id="id_comment" class="materialize-textarea" data-length="120"></textarea>
+               <label for="id_comment">Sabe a resposta ?</label>
+               <div style="color:red">{{ form.reply.errors }}</div>
+            </div>
+            <button type="submit" class="btn-floating waves-effect waves-light green" ><i class="material-icons">send</i></button>
+         </div>
+      </form>
+   </div>
+</div>
+{% endblock %}
