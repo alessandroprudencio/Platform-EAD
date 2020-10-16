@@ -1,2 +1,3 @@
 # Platform-EAD
-Plataforma de Estudo com Phyton e Django
+Plataforma EAD com Phyton e Django
+
