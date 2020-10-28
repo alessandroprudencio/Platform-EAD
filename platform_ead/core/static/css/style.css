@@ -82,6 +82,9 @@ body .primary-button {
 }
 .footer {
     background: #111;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
     color: #666;
     text-align: center;
     padding: 1em;
