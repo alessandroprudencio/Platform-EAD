@@ -1,6 +1,7 @@
 # Platform-EAD
 Plataforma EAD com Phyton e Django
 
+   <img  src="https://github.com/alessandroprudencio/Platform-EAD/blob/master/screen_pictures/print.png" width="50%" />
 
 ## Vamos começar!
 
