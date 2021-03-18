@@ -3,7 +3,7 @@ chardet==3.0.4
 Django==2.1.7
 idna==2.8
 model-mommy==1.6.0
-Pillow==6.0.0
+Pillow==8.1.1
 pytz==2018.9
 requests==2.21.0
 six==1.12.0
